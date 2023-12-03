@@ -156,7 +156,6 @@ void librarian(){
     printf("\t4. Add Member\n");
     printf("\t5. Books that are Borrowed\n");
     printf("\t6. Remove Member\n");
-    printf("\t7. All Members\n");
     printf("\t0. Return to main menu\n");
     scanf("%d", &choice);
 
@@ -178,23 +177,16 @@ void librarian(){
     }
     else if (choice == 5)
     {
-        /* code to show issued books */
+        issuedbooks();
     }
-
     else if (choice == 6)
     {
         removemember();
     }
-    else if (choice == 7)
-    {
-        /* code to show all members */
-    }
-
     else if (choice == 0)
     {
         main_menu();
     }
-
     else
     {
         printf("Invalid Choice!\n");
@@ -202,7 +194,6 @@ void librarian(){
         getch();
         exit(0);
     }
-
 }
 
 void addlibrarian(){
@@ -246,8 +237,7 @@ void addlibrarian(){
         else
         {
             exit(0);
-        }
-        
+        }   
     }
     fclose(fp);
     printf("\tPress 1 to return to main menu\n");
@@ -261,7 +251,6 @@ void addlibrarian(){
     {
         exit(0);
     }
-    
 }
 
 void removelibrarian(){
@@ -299,7 +288,8 @@ void removelibrarian(){
     }
 }
 
-void isuedbooks(){
+void issuedbooks(){
+    int n;
     header();
     printf("\t\t\t\t\t<== Issued Books ==>\n\n");
     printf("%-10s %-30s %-10s %-30s\n\n\n", "Student Id", "Student Name", "Book Code", "Book Name");
@@ -310,6 +300,18 @@ void isuedbooks(){
         printf("%-10s %-30s %-10s %-30s\n\n", mem.id, mem.name, mem.bookcode, mem.bookname);
     }
     fclose(fp);
+    printf("\tPress 1 to return to main menu\n");
+    printf("\tPress any key to Exit\n");
+    scanf("%d", &n);
+    switch (n)
+    {
+    case 1:
+        librarian();
+        break;
+    default:
+        exit(0);
+        break;
+    }
 }
 
 void memberlogin(){
@@ -848,6 +850,7 @@ void addmember(){
     header();
     int n;
     char filename[50];
+    printf("\t\t\t\t <== Add Member ==>\n\n");
     printf("Enter details:\n");
     printf("\tID :\t");
     scanf("%s", mem.id);
@@ -857,7 +860,8 @@ void addmember(){
     printf("\tSemister :\t");
     scanf("%d", &mem.semister);
     printf("\tSection :\t");
-    scanf("%s", mem.section);
+    fflush(stdin);
+    gets(mem.section);
     printf("\tDepartment :\t");
     scanf("%s", mem.dept);
     printf("\tPassword :\t");
